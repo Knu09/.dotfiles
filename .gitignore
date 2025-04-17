@@ -1,0 +1,26 @@
+# Ignore plugin folders
+config/nvim/pack/
+config/nvim/lua/lazy/
+
+tt.*
+.tests
+doc/tags
+debug
+.repro
+foo.*
+*.log
+data
+
+# Ignore lock and generated metadata
+lazy-lock.json
+lazyvim.json
+
+# Swap, backup, or undo files (just in case)
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# OS junk
+.DS_Store
+Thumbs.db
