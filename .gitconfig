@@ -1,0 +1,7 @@
+[user]
+	name = Knu09
+	email = 132640979+Knu09@users.noreply.github.com
+[pull]
+	ff = only
+[url "git@github.com:"]
+	insteadOf = https://github.com/
