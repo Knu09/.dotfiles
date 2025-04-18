@@ -1,6 +1,6 @@
 # Ignore plugin folders
-config/nvim/pack/
-config/nvim/lua/lazy/
+.config/nvim/pack/
+.config/nvim/lua/lazy/
 
 tt.*
 .tests
