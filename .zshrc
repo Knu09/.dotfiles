@@ -1,4 +1,6 @@
-neofetch
+if [[ $TERM_PROGRAM != "vscode" && $TERM != "xterm-256color" && $TERM != "screen" ]]; then
+  neofetch
+fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
