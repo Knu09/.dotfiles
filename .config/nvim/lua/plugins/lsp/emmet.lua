@@ -1,13 +1,6 @@
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local util = require("lspconfig/util")
 
-return {
-  capabilities = capabilities,
-  filetypes = { "html", "templ", "astro", "javascript", "typescript", "react" },
-  settings = {
-    emmet = {
-      includeLanguages = {
-        templ = "html",
-      },
-    },
-  },
-}
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+return {}
