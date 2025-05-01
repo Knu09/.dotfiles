@@ -32,16 +32,18 @@ keymap.set("n", "sk", "<C-w>k")
 keymap.set("n", "sj", "<C-w>j")
 keymap.set("n", "sl", "<C-w>l")
 
+keymap.set("n", "<S-s>", vim.lsp.buf.format, { desc = "Format" })
+
 -- Diagnostics
 
 keymap.set("n", "<leader>r", function()
   require("craftzdog.hsl").replaceHexWithHSL()
-end)
+end, { desc = "Replase Hex with HSL" })
 
 keymap.set("n", "<leader>i", function()
   require("craftzdog.lsp").toggleInlayHints()
 end)
 
-vim.api.nvim_create_user_command("ToggleAutoformat", function()
-  require("craftzdog.lsp").toggleAutoformat()
-end, {})
+-- vim.api.nvim_create_user_command("ToggleAutoformat", function()
+--   require("craftzdog.lsp").toggleAutoformat()
+-- end, {})
