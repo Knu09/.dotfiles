@@ -111,11 +111,24 @@ return {
       }
     end,
   },
-  -- startup header
+
   {
     "folke/snacks.nvim",
     opts = {
+
+      -- startup header
       dashboard = {
+        picker = {
+          sources = {
+            explorer = {
+              layout = {
+                layout = {
+                  width = 5,
+                },
+              },
+            },
+          },
+        },
         preset = {
           header = [[
 ██╗  ██╗███╗   ██╗██╗   ██╗
