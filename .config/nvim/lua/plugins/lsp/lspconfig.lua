@@ -83,15 +83,6 @@ return {
     lspconfig.lua_ls.setup({})
     lspconfig.clangd.setup({})
 
-    -- Setup lsp for tailwindcss root directory
-    lspconfig.tailwindcss.setup({
-      rood_dir = function(fname)
-        local root_pattern =
-          require("lspconfig").util.root_pattern("tailwind.config.cjs", "tailwind.config.js", "postcss.config.js")
-        return root_pattern(fname)
-      end,
-    })
-
     -- Setup lsp using mason-lspconfig
     require("mason").setup({})
 
@@ -142,7 +133,33 @@ return {
           filetypes = { "html", "templ" },
         })
       end,
+      -- Rust analyzer
       ["rust_analyzer"] = function() end,
+
+      -- Setup lsp for tailwindcss root directory
+      ["tailwindcss"] = function()
+        lspconfig.tailwindcss.setup({
+          capabilities = capabilities,
+          filetypes = {
+            "templ",
+            "html",
+            "css",
+            "javascript",
+            "javascriptreact",
+            "typescript",
+            "typescriptreact",
+            "svelte",
+          },
+          root_dir = util.root_pattern("tailwind.config.js", "tailwind.config.cjs", "postcss.config.js"),
+          settings = {
+            tailwindCSS = {
+              includeLanguages = {
+                templ = "html",
+              },
+            },
+          },
+        })
+      end,
     })
   end,
 }
