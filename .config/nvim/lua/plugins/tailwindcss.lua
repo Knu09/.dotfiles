@@ -1,26 +1,5 @@
 return {
   {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        tailwindcss = {
-          filetypes = { "templ", "javascriptreact", "typescript", "react", "svelte" },
-          settings = {
-            tailwindCSS = {
-              includeLanguages = {
-                templ = "html",
-              },
-            },
-          },
-          root_dir = function(fname)
-            local util = require("lspconfig.util")
-            return util.root_pattern("tailwind.config.js", "tailwind.config.cjs", "postcss.config.js")(fname)
-          end,
-        },
-      },
-    },
-  },
-  {
     "NvChad/nvim-colorizer.lua",
     opts = function(_, opts)
       local util = require("lspconfig.util")
