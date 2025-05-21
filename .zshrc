@@ -1,6 +1,9 @@
+XDG_MENU_PREFIX=arch- kbuildsycoca6
+
 if [[ $TERM_PROGRAM != "vscode" && $TERM != "xterm-256color" && $TERM != "screen" ]]; then
   neofetch
 fi
+
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -86,6 +89,8 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 alias ls='ls --color'
 alias vim='nvim'
 alias c='clear'
+alias open='xdg-open'
+alias cd='z'
 
 # Shell integration
 eval "$(fzf --zsh)"
@@ -108,3 +113,5 @@ export PATH=~/.npm-global/bin:$PATH
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+
