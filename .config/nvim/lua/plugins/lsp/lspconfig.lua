@@ -160,6 +160,31 @@ return {
           },
         })
       end,
+      ["pylsp"] = function()
+        lspconfig.pylsp.setup({
+          capabilities = capabilities,
+          settings = {
+            pylsp = {
+              plugins = {
+                ruff = { enabled = true },
+                black = { enabled = true },
+              },
+            },
+          },
+        })
+      end,
+      ["intelephense"] = function()
+        lspconfig.intelephense.setup({
+          capabilities = capabilities,
+          settings = {
+            intelephense = {
+              files = {
+                maxSize = 5000000, -- adjust if needed
+              },
+            },
+          },
+        })
+      end,
     })
   end,
 }
