@@ -78,25 +78,26 @@ return {
       end,
     })
 
-    -- Setup lsp using mason-lspconfig
-    require("mason").setup({})
+    -- Setup Mason
+    require("mason").setup()
 
     mason_lspconfig.setup_handlers({
-      -- default handler for installed server
       function(server_name)
-        lspconfig[server_name].setup({})
+        lspconfig[server_name].setup({ capabilities = capabilities })
       end,
-      lua_ls = function() end,
+
+      -- Custom LSP setups
       ["html"] = function()
-        lspconfig["html"].setup({
+        lspconfig.html.setup({
           capabilities = capabilities,
           filetypes = { "html", "templ" },
         })
       end,
+
       ["emmet_ls"] = function()
-        lspconfig["emmet_ls"].setup({
+        lspconfig.emmet_ls.setup({
           capabilities = capabilities,
-          filetypes = { "html", "templ", "astro", "javascript", "typescript", "react" },
+          filetypes = { "html", "templ", "astro", "javascript", "typescript", "javascriptreact", "typescriptreact" },
           settings = {
             emmet = {
               includeLanguages = {
@@ -106,8 +107,9 @@ return {
           },
         })
       end,
+
       ["gopls"] = function()
-        lspconfig["gopls"].setup({
+        lspconfig.gopls.setup({
           capabilities = capabilities,
           cmd = { "gopls" },
           filetypes = { "go", "gomod", "gowork", "gotmpl", "templ" },
@@ -122,28 +124,14 @@ return {
           },
         })
       end,
-      ["htmx"] = function()
-        lspconfig["htmx"].setup({
-          capabilities = capabilities,
-          filetypes = { "html", "templ" },
-        })
-      end,
-      -- Rust analyzer
-      ["rust_analyzer"] = function() end,
 
-      -- Setup lsp for tailwindcss root directory
       ["tailwindcss"] = function()
         lspconfig.tailwindcss.setup({
           capabilities = capabilities,
           filetypes = {
-            "templ",
-            "html",
-            "css",
-            "javascript",
-            "javascriptreact",
-            "typescript",
-            "typescriptreact",
-            "svelte",
+            "templ", "html", "css",
+            "javascript", "javascriptreact",
+            "typescript", "typescriptreact", "svelte"
           },
           root_dir = util.root_pattern("tailwind.config.js", "tailwind.config.cjs", "postcss.config.js"),
           settings = {
@@ -155,6 +143,7 @@ return {
           },
         })
       end,
+
       ["pylsp"] = function()
         lspconfig.pylsp.setup({
           capabilities = capabilities,
@@ -168,13 +157,14 @@ return {
           },
         })
       end,
+
       ["intelephense"] = function()
         lspconfig.intelephense.setup({
           capabilities = capabilities,
           settings = {
             intelephense = {
               files = {
-                maxSize = 5000000, -- adjust if needed
+                maxSize = 5000000,
               },
             },
           },
