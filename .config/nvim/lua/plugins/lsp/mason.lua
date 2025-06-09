@@ -32,10 +32,14 @@ return {
         "tailwindcss",
         "svelte",
         "lua_ls",
+        "gopls",
         "graphql",
         "emmet_ls",
         "prismals",
-        "pyright",
+        "pylsp",
+        "intelephense",
+        "rust_analyzer",
+        "clangd",
       },
     })
 
