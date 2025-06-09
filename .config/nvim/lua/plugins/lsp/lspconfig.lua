@@ -34,7 +34,7 @@ return {
         -- Buffer local mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions
         local opts = { buffer = ev.buf, silent = true }
-        local keymap = vim,.keymap
+        local keymap = vim.keymap
 
         -- set keybinds
         opts.desc = "Show LSP references"
@@ -129,9 +129,14 @@ return {
         lspconfig.tailwindcss.setup({
           capabilities = capabilities,
           filetypes = {
-            "templ", "html", "css",
-            "javascript", "javascriptreact",
-            "typescript", "typescriptreact", "svelte"
+            "templ",
+            "html",
+            "css",
+            "javascript",
+            "javascriptreact",
+            "typescript",
+            "typescriptreact",
+            "svelte",
           },
           root_dir = util.root_pattern("tailwind.config.js", "tailwind.config.cjs", "postcss.config.js"),
           settings = {
