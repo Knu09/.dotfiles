@@ -1,8 +1,8 @@
-XDG_MENU_PREFIX=arch- kbuildsycoca6
+# XDG_MENU_PREFIX=arch- kbuildsycoca6
 
-if [[ $TERM_PROGRAM != "vscode" && $TERM != "xterm-256color" && $TERM != "screen" ]]; then
-  neofetch
-fi
+# if [[ $TERM_PROGRAM != "vscode" && $TERM != "xterm-256color" && $TERM != "screen" ]]; then
+#   neofetch
+# fi
 
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -52,7 +52,41 @@ autoload -Uz compinit && compinit
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Keybindings
+#  Aliases 
+# Override aliases here or in '~/.zshrc' (already set in .zshenv)
+
+# # Helpful aliases
+alias ls='ls --color'
+alias vim='nvim'
+alias c='clear'
+alias open='xdg-open'
+alias cd='z'
+alias c='clear'                                                        # clear terminal
+# alias l='eza -lh --icons=auto'                                         # long list
+# alias ls='eza -1 --icons=auto'                                         # short list
+# alias ll='eza -lha --icons=auto --sort=name --group-directories-first' # long list all
+# alias ld='eza -lhD --icons=auto'                                       # long list dirs
+# alias lt='eza --icons=auto --tree'                                     # list folder as tree
+# alias un='$aurhelper -Rns'                                             # uninstall package
+# alias up='$aurhelper -Syu'                                             # update system/package/aur
+# alias pl='$aurhelper -Qs'                                              # list installed package
+# alias pa='$aurhelper -Ss'                                              # list available package
+# alias pc='$aurhelper -Sc'                                              # remove unused cache
+# alias po='$aurhelper -Qtdq | $aurhelper -Rns -'                        # remove unused packages, also try > $aurhelper -Qqd | $aurhelper -Rsu --print -
+# alias vc='code'                                                        # gui code editor
+# alias fastfetch='fastfetch --logo-type kitty'
+
+# Directory navigation shortcuts
+alias ..='cd ..'
+alias ...='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
+alias .5='cd ../../../../..'
+
+# # Always mkdir a path (this doesn't inhibit functionality to make a single dir)
+alias mkdir='mkdir -p'
+
+#  KEYBINDINGS 
 
 # bindkey -e
 bindkey -v
@@ -65,7 +99,7 @@ bindkey -M vicmd '^W' backward-kill-word
 bindkey '^?' backward-delete-char
 bindkey '^H' backward-delete-char
 
-#HISTORY
+#  HISTORY 
 HISTSIZE=5000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
@@ -78,29 +112,17 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
-# Completion styling
+#  COMPLETION AND STYLING 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-# Aliases
-alias ls='ls --color'
-alias vim='nvim'
-alias c='clear'
-alias open='xdg-open'
-alias cd='z'
-
-# Shell integration
+#  ENVIRONMENT VARIABLE AND PATHS 
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
-
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-export QT_QPA_PLATFORM=xcb
-export GOPATH=~/go
-export PATH=$PATH:/usr/local/bin:$GOPATH/bin:~/.local/bin
 
 # ANDROID SDK
 export ANDROID_HOME=$HOME/Android/Sdk
@@ -109,9 +131,23 @@ export PATH=$HOME/Android/Sdk/cmdline-tools/latest/bin:$PATH
 export PATH=$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
 export PATH=~/.npm-global/bin:$PATH
 
+export QT_QPA_PLATFORM=xcb
+export GOPATH=~/go
+export PATH=$PATH:/usr/local/bin:$GOPATH/bin:~/.local/bin
 
+# PYENV
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+#  Plugins 
+# manually add your oh-my-zsh plugins here
+plugins=(
+    "sudo"
+    # "git"                     # (default)
+    # "zsh-autosuggestions"     # (default)
+    # "zsh-syntax-highlighting" # (default)
+    # "zsh-completions"         # (default)
+)
 
 
