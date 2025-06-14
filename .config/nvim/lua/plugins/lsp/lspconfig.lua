@@ -85,100 +85,70 @@ return {
     -- Setup Mason
     require("mason").setup()
 
-    mason_lspconfig.setup_handlers({
-      function(server_name)
-        lspconfig[server_name].setup({ capabilities = capabilities })
-      end,
-
-      -- Custom LSP setups
-      ["html"] = function()
-        lspconfig.html.setup({
-          capabilities = capabilities,
-          filetypes = { "html", "templ" },
-        })
-      end,
-
-      ["emmet_ls"] = function()
-        lspconfig.emmet_ls.setup({
-          capabilities = capabilities,
-          filetypes = { "html", "templ", "astro", "javascript", "typescript", "javascriptreact", "typescriptreact" },
-          settings = {
-            emmet = {
-              includeLanguages = {
-                templ = "html",
-              },
+    -- Setup each LSP manually (with custom settings)
+    local servers = {
+      html = {
+        filetypes = { "html", "templ" },
+      },
+      emmet_ls = {
+        filetypes = { "html", "templ", "astro", "javascript", "typescript", "javascriptreact", "typescriptreact" },
+        settings = {
+          emmet = {
+            includeLanguages = { templ = "html" },
+          },
+        },
+      },
+      gopls = {
+        cmd = { "gopls" },
+        filetypes = { "go", "gomod", "gowork", "gotmpl", "templ" },
+        root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+        settings = {
+          gopls = {
+            usePlaceholders = true,
+            analyses = { unusedparams = true },
+          },
+        },
+      },
+      tailwindcss = {
+        filetypes = {
+          "templ",
+          "html",
+          "css",
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact",
+          "svelte",
+        },
+        root_dir = util.root_pattern("tailwind.config.js", "tailwind.config.cjs", "postcss.config.js"),
+        settings = {
+          tailwindCSS = {
+            includeLanguages = { templ = "html" },
+          },
+        },
+      },
+      pylsp = {
+        settings = {
+          pylsp = {
+            plugins = {
+              ruff = { enabled = true },
+              black = { enabled = true },
             },
           },
-        })
-      end,
+        },
+      },
+      intelephense = {
+        settings = {
+          intelephense = {
+            files = { maxSize = 5000000 },
+          },
+        },
+      },
+    }
 
-      ["gopls"] = function()
-        lspconfig.gopls.setup({
-          capabilities = capabilities,
-          cmd = { "gopls" },
-          filetypes = { "go", "gomod", "gowork", "gotmpl", "templ" },
-          root_dir = util.root_pattern("go.work", "go.mod", ".git"),
-          settings = {
-            gopls = {
-              usePlaceholders = true,
-              analyses = {
-                unusedparams = true,
-              },
-            },
-          },
-        })
-      end,
-
-      ["tailwindcss"] = function()
-        lspconfig.tailwindcss.setup({
-          capabilities = capabilities,
-          filetypes = {
-            "templ",
-            "html",
-            "css",
-            "javascript",
-            "javascriptreact",
-            "typescript",
-            "typescriptreact",
-            "svelte",
-          },
-          root_dir = util.root_pattern("tailwind.config.js", "tailwind.config.cjs", "postcss.config.js"),
-          settings = {
-            tailwindCSS = {
-              includeLanguages = {
-                templ = "html",
-              },
-            },
-          },
-        })
-      end,
-
-      ["pylsp"] = function()
-        lspconfig.pylsp.setup({
-          capabilities = capabilities,
-          settings = {
-            pylsp = {
-              plugins = {
-                ruff = { enabled = true },
-                black = { enabled = true },
-              },
-            },
-          },
-        })
-      end,
-
-      ["intelephense"] = function()
-        lspconfig.intelephense.setup({
-          capabilities = capabilities,
-          settings = {
-            intelephense = {
-              files = {
-                maxSize = 5000000,
-              },
-            },
-          },
-        })
-      end,
-    })
+    for server, config in pairs(servers) do
+      config.capabilities = capabilities
+      lspconfig[server].setup(config)
+    end
   end,
 }
