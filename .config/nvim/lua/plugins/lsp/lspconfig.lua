@@ -82,10 +82,10 @@ return {
       end,
     })
 
-    -- Setup Mason
+    -- setup mason
     require("mason").setup()
 
-    -- Setup each LSP manually (with custom settings)
+    -- setup each lsp manually (with custom settings)
     local servers = {
       html = {
         filetypes = { "html", "templ" },
@@ -94,9 +94,21 @@ return {
         filetypes = { "html", "templ", "astro", "javascript", "typescript", "javascriptreact", "typescriptreact" },
         settings = {
           emmet = {
-            includeLanguages = { templ = "html" },
+            includelanguages = { templ = "html" },
           },
         },
+      },
+      tsserver = {
+        root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
+      },
+      eslint = {
+        on_attach = function(client, bufnr)
+          client.server_capabilities.documentformattingprovider = true
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            command = "eslintfixall",
+          })
+        end,
       },
       gopls = {
         cmd = { "gopls" },
@@ -104,7 +116,7 @@ return {
         root_dir = util.root_pattern("go.work", "go.mod", ".git"),
         settings = {
           gopls = {
-            usePlaceholders = true,
+            useplaceholders = true,
             analyses = { unusedparams = true },
           },
         },
@@ -122,8 +134,8 @@ return {
         },
         root_dir = util.root_pattern("tailwind.config.js", "tailwind.config.cjs", "postcss.config.js"),
         settings = {
-          tailwindCSS = {
-            includeLanguages = { templ = "html" },
+          tailwindcss = {
+            includelanguages = { templ = "html" },
           },
         },
       },
@@ -140,7 +152,7 @@ return {
       intelephense = {
         settings = {
           intelephense = {
-            files = { maxSize = 5000000 },
+            files = { maxsize = 5000000 },
           },
         },
       },
