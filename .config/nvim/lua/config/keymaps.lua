@@ -34,6 +34,13 @@ keymap.set("n", "sl", "<C-w>l")
 
 keymap.set("n", "<S-s>", vim.lsp.buf.format, { desc = "Format" })
 
+-- Remaping the x and d keys in normal and visual mode
+keymap.set({ "n", "v" }, "x", '"_x')
+keymap.set({ "n", "v" }, "d", '"_d')
+
+-- Visual mode paste (prevent clipboard overwrite)
+keymap.set("x", "p", [["_dP]], { desc = "Paste without overwriting clipboard" })
+
 -- Diagnostics
 
 keymap.set("n", "<leader>r", function()
