@@ -106,7 +106,7 @@ return {
           client.server_capabilities.documentformattingprovider = true
           vim.api.nvim_create_autocmd("BufWritePre", {
             buffer = bufnr,
-            command = "eslintfixall",
+            command = "EslintFixAll",
           })
         end,
       },
