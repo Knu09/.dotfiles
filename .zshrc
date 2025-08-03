@@ -21,6 +21,15 @@ if [ ! -d "$ZINIT_HOME" ]; then
    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
+# fzf binary PATH
+export PATH="/sbin:$PATH"
+
+# fzf Initialization
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# load fzf plugin
+eval "$(fzf --zsh)"
+
 # Source/load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
@@ -120,7 +129,6 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 #  ENVIRONMENT VARIABLE AND PATHS 
-eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
