@@ -12,9 +12,10 @@ return {
     end
 
     -- Detect root dir
-    local root_dir = vim.fn.getcwd()
+    local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
+    local root_dir = require("jdtls.setup").find_root(root_markers)
     if root_dir == nil then
-      vim.notify("JDTLS: No root dir found", vim.log.levels.ERROR)
+      vim.notify("JDTLS: No project root found", vim.log.levels.ERROR)
       return
     end
 
