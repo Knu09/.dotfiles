@@ -46,4 +46,19 @@ return {
       })
     end,
   },
+
+  -- Treesitter Context (shows code context at top of window)
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    config = function()
+      require("treesitter-context").setup({
+        enable = true,
+        max_line = 3,
+        trim_scope = "outer",
+        mode = "cursor",
+        multiline_threshold = 20,
+        separator = nil,
+      })
+    end,
+  },
 }
