@@ -148,6 +148,9 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+# Flutter BINARY
+export PATH="$PATH:$HOME/flutter/bin"
+
 #  Plugins 
 # manually add your oh-my-zsh plugins here
 plugins=(
