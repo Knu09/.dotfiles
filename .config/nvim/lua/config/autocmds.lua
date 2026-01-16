@@ -45,3 +45,14 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Shift+Tab to un-indent in insert mode (optional)
 vim.api.nvim_set_keymap("i", "<S-Tab>", "<C-d>", { noremap = true, silent = true })
+
+-- Set 2-space indent only for .dart files
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "dart",
+  callback = function()
+    vim.bo.shiftwidth = 2
+    vim.bo.tabstop = 2
+    vim.bo.softtabstop = 2
+    vim.bo.expandtab = true
+  end,
+})
