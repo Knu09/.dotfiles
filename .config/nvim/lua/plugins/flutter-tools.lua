@@ -20,8 +20,10 @@ return {
 
       -- Direct Flutter commands
       vim.keymap.set("n", "<leader>Fr", "<cmd>FlutterReload<CR>", { desc = "Flutter: Hot Reload" })
-      vim.keymap.set("n", "<leader>FR", "<cmd>FlutterRun<CR>", { desc = "Flutter: Hot Restart" })
+      vim.keymap.set("n", "<leader>FR", "<cmd>FlutterRestart<CR>", { desc = "Flutter: Hot Restart" })
+      vim.keymap.set("n", "<leader>Fs", "<cmd>FlutterRun<CR>", { desc = "Flutter: Start a Flutter Project" })
       vim.keymap.set("n", "<leader>Fd", "<cmd>FlutterDevices<CR>", { desc = "Flutter: List Devices" })
+      vim.keymap.set("n", "<leader>FD", "<cmd>FlutterDetach<CR>", { desc = "Flutter: Detach Device" })
       vim.keymap.set("n", "<leader>Fe", "<cmd>FlutterEmulators<CR>", { desc = "Flutter: List Emulators" })
       vim.keymap.set("n", "<leader>Fl", "<cmd>FlutterLogToggle<CR>", { desc = "Flutter: Toggle Dev Log" })
       vim.keymap.set("n", "<leader>Fc", "<cmd>FlutterLogClear<CR>", { desc = "Flutter: Clear Dev Log" })
