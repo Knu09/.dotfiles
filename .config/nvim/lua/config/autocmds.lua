@@ -48,11 +48,24 @@ vim.api.nvim_set_keymap("i", "<S-Tab>", "<C-d>", { noremap = true, silent = true
 
 -- Set 2-space indent only for .dart files
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "dart",
+  pattern = { "dart", "lua" },
   callback = function()
     vim.bo.shiftwidth = 2
     vim.bo.tabstop = 2
     vim.bo.softtabstop = 2
     vim.bo.expandtab = true
+    vim.opt_local.autoindent = true
+    vim.opt_local.smartindent = true
+  end,
+})
+
+-- Auto hot reload on save (Neovim → Flutter)
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = "*.dart",
+  callback = function()
+    -- delay a little to ensure file is fully written
+    vim.defer_fn(function()
+      vim.cmd("FlutterReload")
+    end, 100)
   end,
 })
